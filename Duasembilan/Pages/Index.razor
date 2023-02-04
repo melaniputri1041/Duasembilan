@@ -1,0 +1,124 @@
+﻿@page "/"
+@using Duasembilan.Models;
+
+<PageTitle>Index</PageTitle>
+
+@*<h1>@asSekop.kembang</h1>*@
+@*<h1>@angkaS</h1>*@
+@*<h1>@asSekop.KartuName</h1>*@
+
+
+
+Welcome to your new app.
+
+
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@*@foreach (var kartu in listRemi)
+{
+	<h1>@kartu.KartuName</h1>
+}*@
+
+<div class="row">
+	<div class="col-6">
+		<div class="card">
+			<div class="card-body"> @*button onclick add berfungsi jika kita mengklik tambah mereka akan bertambah ke aksi*@
+				<button onclick="@Addsneaker" class="btn btn-primary">Tambah Sneaker</button>
+				<button onclick="@Addsendal" class="btn btn-success">Tambah Sendal</button>
+				<button onclick="@Addsepatukulit" class="btn btn-warning">Tambah Sepatu Kulit</button>
+				<button onclick="@Addpantofel" class="btn btn-danger">Tambah pantofel</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-6">
+		<div class="card">
+			<div class="card-body">
+				<h3>Rak sepatu</h3>
+				<table class="table table-bordered">
+					<tr>
+						<th>Sepatu</th>
+						<th>aksi</th>
+					</tr>
+					@foreach(var sepatu in listsepatu)
+					{
+						<tr>
+							<td>@sepatu.Kumpulan</td>
+							<td>
+								@*button onclick berfungsi untuk supaya kita klis hapus, data yang kita ingin hapus terhapus*@
+								<button @onclick="() => hapus(sepatu)" type="button" class="btn">Hapus</button>
+							</td>
+						</tr>
+					}
+					
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+@code{
+
+	//KartuRemi asSekop;
+	//int angka = 0;
+	//string angkaS = "";
+
+	//List<KartuRemi> listRemi;
+	List<sepatu> listsepatu;//berfungsi untuk membuat listhapus
+
+	protected override void OnInitialized()
+	{
+		listsepatu = new List<sepatu>();
+
+		//asSekop = new KartuRemi(KembangRemi.Sekop, AngkaRemi.As);
+		//(int) yaitu cating untuk merubah enum ke int
+		//angka = (int)asSekop.Angka;
+		//angkaS = asSekop.Angka.ToString();
+
+
+		//list isa digunakan unutk menjadi alternatif menyimpan data yang banyak tanpa menggunakan array
+
+
+		//listRemi = new List<KartuRemi>();
+		//listRemi.Add(new KartuRemi(KembangRemi.Tempe, AngkaRemi.As));
+		//listRemi.Add(new KartuRemi(KembangRemi.lope, AngkaRemi.As));
+
+		//cara menambah item ke dalam suatu list listRemi.Add();
+
+		//KartuRemi asKeriting =
+		//new KartuRemi(KembangRemi.Keriting, AngkaRemi.As);
+
+		//listRemi.Add(asKeriting);
+
+		//int indexAsKeriting = listRemi.IndexOf(asKeriting);
+		//bool adaAsKeriting = listRemi.Contains(asKeriting);
+		//listRemi.Remove(asKeriting); // digunakan untuk menghapus
+
+	}
+
+	//berfungsi untuk menambah data dari file enums nampil di aplikasinya
+	public void Addsneaker()
+	{
+		listsepatu.Add(new sepatu(Kumpulan.Sneaker));
+		
+
+	}
+	public void Addsendal()
+	{
+		listsepatu.Add(new sepatu(Kumpulan.Sendal));
+	}
+	public void Addsepatukulit()
+	{
+		listsepatu.Add(new sepatu(Kumpulan.Sepatukulit));
+	}
+	public void Addpantofel()
+	{
+		listsepatu.Add(new sepatu(Kumpulan.Pantofel));
+	}
+	
+	//void ini berfungsi untuk menghapus data yang ingin kita hapus lalu di pasang di button onclick hapus
+	public void hapus(sepatu sepatu)
+	{
+			listsepatu.Remove(sepatu);
+	}
+
+}
